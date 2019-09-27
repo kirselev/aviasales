@@ -1,6 +1,7 @@
 {
   "name": "aviasales",
   "version": "0.1.0",
+  "homepage": "./",
   "private": true,
   "dependencies": {
     "@vkontakte/icons": "^1.10.0",

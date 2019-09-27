@@ -1,7 +1,7 @@
 import React from 'react';
 import connect from '@vkontakte/vk-connect';
 import '@vkontakte/vkui/dist/vkui.css';
-import {Panel, Group, PanelHeader, Div,
+import {Panel, Group, PanelHeader,
   FormLayout, Select, List, Cell, Button, CellButton, InfoRow, Separator,
 
   HeaderButton, ListItem, platform, IOS} from '@vkontakte/vkui';
@@ -26,46 +26,9 @@ class Way extends React.Component {
       draggingList: [2, 3, 1, 4, 5],
       removeList: ['Михаил Андриевский', 'Вадим Дорохов', 'Саша Колобов'],
       activePanel: 'way',
-      lat: 0,
-      long: 0,
-      currentGeo: null,
-      coordinates: null,
-      activePanel: 'start',
     };
+  }
 
-    connect.subscribe((e) => {
-      switch (e.detail.type) {
-        case 'VKWebAppGeodataResult':
-          this.setState({
-            lat: e.detail.data.lat,
-            long: e.detail.data.long,
-            firstEntry: false,
-            currentGeo : { center: [e.detail.data.lat, e.detail.data.long], zoom: 15 },
-            coordinates : [[e.detail.data.lat, e.detail.data.long]],
-
-          });
-          break;
-        default:
-          console.log("error");
-      }
-      connect.send("VKWebAppGetGeodata", {});
-    });
-
-    }
-    componentDidMount() {
-      this.timerID = setInterval(
-        () => this.tick(),
-        10000
-      );
-    }
-
-    componentWillUnmount() {
-      clearInterval(this.timerID);
-    }
-
-    tick() {
-      connect.send("VKWebAppGetGeodata", {});
-    }
 
   render(){
     return (
@@ -114,13 +77,8 @@ class Way extends React.Component {
               </Group>
               // <Separator style={{ margin: '12px 0' }} />
               <List>
-              {this.state.currentGeo && <YMaps>
-                <Div>
-                  <Map defaultState={this.state.currentGeo}>
-                    {this.state.coordinates.map(coordinate => (<Placemark geometry={coordinate} />))}
-                  </Map>
-                </Div>
-              </YMaps>}
+
+
               {this.state.removeList.length > 0 &&
                   <Group title="Удаление">
                     <List>

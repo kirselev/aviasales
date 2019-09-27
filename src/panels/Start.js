@@ -1,7 +1,7 @@
 import React from 'react';
 import connect from '@vkontakte/vk-connect';
 import '@vkontakte/vkui/dist/vkui.css';
-import {Panel, Div, Group,Cell, PanelHeader, Button, List, ANDROID,
+import {Panel, Div, Group,Cell, PanelHeader, Button, List, ANDROID, Checkbox,
    View, FormLayout, Select, CellButton, Header, Switch, PopoutWrapper,
   HeaderButton, ListItem, platform, IOS, } from '@vkontakte/vkui';
 import Icon28ChevronBack from '@vkontakte/icons/dist/28/chevron_back';
@@ -95,8 +95,13 @@ class Start extends React.Component {
           {this.props.player}
           </List>
           <Cell expandable onClick={this.props.go} data-to="modal">Открыть модальную страницу</Cell>
+          <Group title="Фильтры">
+            <Checkbox>Парки</Checkbox>
+            <Checkbox>Музеи </Checkbox>
+            <Checkbox>Заведения </Checkbox>
+            <Checkbox>Развлечения </Checkbox>
 
-
+          </Group>
         </Panel>
 
 			</View>

@@ -31,14 +31,21 @@ const MODAL_CARD_ABOUT = 'say-about';
 const MODAL_CARD_NOTIFICATIONS = 'notifications';
 const MODAL_CARD_CHAT_INVITE = 'chat-invite';
 
-class App extends React.Component {
+const osname = platform();
+
+class Modal extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
       activeModal: null,
-      modalHistory: []
+      modalHistory: [],
+      activePanel: 'modal',
     };
+
+    this.users = 'k'.repeat(25).split('').map(() => {
+      return 1209;
+    });
 
 
     this.modalBack = () => {
@@ -131,7 +138,6 @@ class App extends React.Component {
         >
           <FormLayout>
             <Button level="secondary" onClick={() => this.setActiveModal(MODAL_PAGE_USER_INFO)} size="xl">Информация о пользователе</Button>
-
 
 
           </FormLayout>
@@ -294,16 +300,14 @@ class App extends React.Component {
     );
 
     return (
-      <View activePanel="modals" modal={modal}>
-        <Panel id="modals">
-          <PanelHeader>Модальные окна</PanelHeader>
+      <View activePanel={this.state.activePanel} modal={modal}>
+        <Panel id= "modal">
+          <PanelHeader  left={<HeaderButton onClick={this.props.go} data-to="start">
+            {osname === IOS ? <Icon28ChevronBack/> : <Icon24Back/>}
+          </HeaderButton>}>>Модальные окна</PanelHeader>
 
           <Group>
             <FormLayout>
-              <Button size="xl" level="secondary" onClick={() => this.setActiveModal(MODAL_PAGE_FILTERS)}>
-                  Открыть модальную страницу
-              </Button>
-
               <Button size="xl" level="secondary" onClick={() => this.setActiveModal(MODAL_CARD_MONEY_SEND)}>
                   Открыть модальные карточки
               </Button>
@@ -315,4 +319,4 @@ class App extends React.Component {
   }
 }
 
-export default App;
+export default Modal;
