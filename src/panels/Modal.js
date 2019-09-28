@@ -49,15 +49,66 @@ class Modal extends React.Component {
 
   render() {
 
+    const button1 = (
+			<Group>
+
+					<Button size="xl" level="secondary" onClick={() => this.setActiveModal('first')}>
+							Открыть модальную страницу
+					</Button>
+
+			</Group>
+		);
+
+
+
+
+    const modal = (
+      <ModalRoot activeModal={this.state.activeModal}>
+
+        <ModalCard
+          id={'first'}
+          onClose={ () => this.setState({activeModal:null})}
+          icon={<Icon56MoneyTransferOutline />}
+          title="Отправляйте деньги друзьям, используя банковскую карту"
+          caption="Номер карты получателя не нужен — он сам решит, куда зачислить средства."
+          actions={[{
+            title: 'Попробовать',
+            type: 'primary',
+            action: () => {
+              this.setState({activeModal:'second'});
+            }
+          }]}
+        >
+        </ModalCard>
+        <ModalCard
+          id={'second'}
+          onClose={ () => this.setState({activeModal:null})}
+          icon={<Icon56MoneyTransferOutline />}
+          title="Вторая карта"
+          caption="Номер карты получателя не нужен — он сам решит, куда зачислить средства."
+          actions={[{
+            title: 'Попробовать',
+            type: 'primary',
+            action: () => {
+              this.setState({activeModal:'first'});
+            }
+          }]}
+        >
+        </ModalCard>
+      </ModalRoot>
+    );
+
     return (
+      <View activePanel='modal' modal={modal}>
         <Panel id= "modal">
           <PanelHeader> Salut </PanelHeader>
           <Group>
             <FormLayout>
-              <Button onClick={console.log('hhh')}>Primary</Button>
+              <Button onClick={console.log}>Primary</Button>
             </FormLayout>
           </Group>
         </Panel>
+      </View>
     );
   }
 }

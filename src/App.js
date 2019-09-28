@@ -18,6 +18,8 @@ import Maps from './panels/Maps';
 import Way from './panels/Way';
 import AddPlace from './panels/AddPlace';
 import Modal from './panels/Modal';
+import Finish from './panels/Finish';
+
 
 const MODAL_PAGE_MUSIC = 'music';
 
@@ -222,27 +224,10 @@ class App extends React.Component {
 
 		const audioPlayer = (
 			<Group>
-				<Div>
-					{this.state.playStatus == Sound.status.PLAYING &&
-						<Sound
-							url={this.state.currentSong.url}
-							playStatus={this.state.playStatus}
-							position={this.state.position}
-							volume={volume}
-							playbackRate={playbackRate}
-							loop={loop}
-							onLoading={({ bytesLoaded, bytesTotal }) => console.log(`${bytesLoaded / bytesTotal * 100}% loaded`)}
-							onLoad={() => console.log('Loaded')}
-							onPlaying={({ position }) => this.setState({ position })}
-							onFinishedPlaying={() => this.setState({ playStatus: Sound.status.STOPPED })}
-						/>
-					}
-				</Div>
-				<FixedLayout vertical="bottom">
-					<Button size="xl" level="secondary" onClick={() => this.setActiveModal(MODAL_PAGE_MUSIC)}>
-							Открыть модальную страницу
-					</Button>
-				</FixedLayout>
+
+				<Button size="xl" level="secondary" onClick={() => this.setActiveModal(MODAL_PAGE_MUSIC)}>
+						Открыть модальную страницу
+				</Button>
 			</Group>
 		);
 
@@ -250,10 +235,11 @@ class App extends React.Component {
 
 		return (
 			<View activePanel={this.state.activePanel} modal={modal}>
-				<Start id="start" fetchedUser={this.state.fetchedUser} go={this.go} player={audioPlayer}/>
-				<Way id="way" go={this.go} player={audioPlayer}/>
-				<AddPlace id = "add" go={this.go}/>
+				<Start id="start" fetchedUser={this.state.fetchedUser} go={this.go} player={() => this.setActiveModal(MODAL_PAGE_MUSIC)}/>
+				<Way id="way" go={this.go}  player={() => this.setActiveModal(MODAL_PAGE_MUSIC)}/>
+				<AddPlace id = "add" go={this.go} player={() => this.setActiveModal(MODAL_PAGE_MUSIC)}/>
 				<Modal id = "modal" go={this.go}/>
+				<Finish id = "finish" go={this.go}/>
 			</View>
 		);
 	}

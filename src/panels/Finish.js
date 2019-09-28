@@ -28,7 +28,7 @@ class Start extends React.Component {
         currentGeo: null,
         coordinates: null,
         draggingList: [2, 3, 1, 4, 5],
-        activePanel: 'start'
+        activePanel: 'finish'
       };
 
 
@@ -40,38 +40,17 @@ class Start extends React.Component {
 
     render(){
     return (
-      <View activePanel={this.state.activePanel}>
-        <Panel id= "start">
-        <PanelHeader>
+
+        <Panel id= "finish">
+        <PanelHeader left={<HeaderButton onClick={this.props.go} data-to="way">
+          {osname === IOS ? <Icon28ChevronBack/> : <Icon24Back/>}
+        </HeaderButton>}>
     			Aviasales
     		</PanelHeader>
-          <Group title="Карты">
 
 
-
-
-          <List>
-            <Cell asideContent={<Switch />}>
-              Heatmap
-            </Cell>
-
-          <Cell expandable onClick={this.props.go} data-to="way">Построить маршрут</Cell>
-          </List>
-
-          </Group>
-          <Group title="Фильтры">
-            <Checkbox>Парки</Checkbox>
-            <Checkbox>Музеи </Checkbox>
-            <Checkbox>Заведения </Checkbox>
-            <Checkbox>Развлечения </Checkbox>
-          </Group>
-
-          {this.props.player}
-
+        <Button size = 'xl'> Открыть в Яндекс.Картах</Button>
         </Panel>
-
-			</View>
-
     );
   }
 }

@@ -1,7 +1,7 @@
 import React from 'react';
 import connect from '@vkontakte/vk-connect';
 import '@vkontakte/vkui/dist/vkui.css';
-import {Panel, Group, PanelHeader, Div,
+import {Panel, Group, PanelHeader, Div, Tabs, TabsItem,
   FormLayout, Select, List, Cell, Button, CellButton, InfoRow, Separator,
 
   HeaderButton, ListItem, platform, IOS} from '@vkontakte/vkui';
@@ -13,6 +13,7 @@ import Icon24info from '@vkontakte/icons/dist/24/info';
 import PropTypes from 'prop-types';
 import { YMaps, Map, Placemark } from 'react-yandex-maps';
 import Icon24Add from '@vkontakte/icons/dist/24/add';
+const MODAL_PAGE_MUSIC = 'music';
 
 
 const osname = platform();
@@ -30,7 +31,7 @@ class Way extends React.Component {
       long: 0,
       currentGeo: null,
       coordinates: null,
-      activePanel: 'start',
+      /*activeModal: 'start',*/
     };
 
 
@@ -65,7 +66,37 @@ class Way extends React.Component {
                     </InfoRow>
                   </Cell>
                 </List>
+
+  </Group>
+                <Group style={{ marginTop: 60 }}>
+                <Tabs theme="light">
+                  <TabsItem
+                    onClick={() => this.setState({ activeTab4: 'dial' })}
+                    selected={this.state.activeTab4 === 'dial'}
+                  >
+                    Диалоги
+                  </TabsItem>
+                  <TabsItem
+                    onClick={() => this.setState({ activeTab4: 'messages' })}
+                    selected={this.state.activeTab4 === 'messages'}
+                  >
+                    Сообщения
+                  </TabsItem>
+                  <TabsItem
+                    onClick={() => this.setState({ activeTab4: 'unread' })}
+                    selected={this.state.activeTab4 === 'unread'}
+                  >
+                    Непрочитанные
+                  </TabsItem>
+                </Tabs>
               </Group>
+
+
+
+
+
+
+
 
               <Group title="Редактирование маршрута">
                <FormLayout>
@@ -86,7 +117,34 @@ class Way extends React.Component {
                 <Separator style={{ margin: '12px 0' }} />
               <List>
 
-              {this.state.removeList.length > 0 &&
+              {this.state.draggingList.length > 0 &&
+                    <List>
+                      {this.state.draggingList.map((item, index) => (
+                        <Cell key={item} removable draggable onRemove={() => {
+                          this.setState({
+                            draggingList: [...this.state.draggingList.slice(0, index), ...this.state.draggingList.slice(index + 1)]
+                          })
+                        }} onDragFinish={({ from, to }) => {
+                          const draggingList = [...this.state.draggingList];
+                          draggingList.splice(from, 1);
+                          draggingList.splice(to, 0, this.state.draggingList[from]);
+                          this.setState({ draggingList });
+                        }}
+                        >
+
+
+                          <CellButton align = "left" before={<Icon24info/>} onClick={this.props.player}>
+                            {item}
+                          </CellButton>
+                        </Cell>
+
+                      ))}
+                    </List>
+
+                }
+
+                {this.state.removeList.length > 0 &&
+                  <Group title="Удаление">
                     <List>
                       {this.state.removeList.map((item, index) => (
                         <Cell key={item} removable draggable onRemove={() => {
@@ -99,26 +157,21 @@ class Way extends React.Component {
                           draggingList.splice(to, 0, this.state.draggingList[from]);
                           this.setState({ draggingList });
                         }}
-                        ><CellButton align = "left" before={<Icon24info  onClick={() => this.setState({ activeModal: 'first' }) } data-to="start"/>}>{item}</CellButton></Cell>
+                        ><CellButton align = "left" before={<Icon24info  onClick={this.props.go} data-to="start"/>}>{item}</CellButton></Cell>
 
                       ))}
                     </List>
-
+                  </Group>
                 }
 
 
               </List>
               </Group>
-               <List>
-               <CellButton expandable onClick={this.props.go} data-to="start">
-                Вернуться обратно
-                </CellButton>
-                </List>
-                <Button level="secondary" size="xl">Сбросить</Button>
+
+              <Button level="secondary" size="xl">Сбросить</Button>
 
 
-                <Button size="xl">Завершить</Button>
-                {this.props.player}
+                <Button size="xl" onClick={this.props.go} data-to="finish">Завершить</Button>
       </Panel>
     );
   }
