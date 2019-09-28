@@ -67,7 +67,7 @@ class App extends React.Component {
 	};
 
 
-	componentDidMount() {
+	/*componentDidMount() {
 		connect.subscribe((e) => {
 			switch (e.detail.type) {
 				case 'VKWebAppGetUserInfoResult':
@@ -78,7 +78,7 @@ class App extends React.Component {
 			}
 		});
 		connect.send('VKWebAppGetUserInfo', {});
-	}
+	}*/
 
 	getStatusText() {
 		switch (this.state.playStatus) {
@@ -215,7 +215,7 @@ class App extends React.Component {
 
 					</Div>
 				</Group>
-				
+
 				</ModalPage>
 			</ModalRoot>
 		);

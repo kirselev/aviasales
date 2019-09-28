@@ -33,39 +33,11 @@ class Way extends React.Component {
       activePanel: 'start',
     };
 
-    connect.subscribe((e) => {
-      switch (e.detail.type) {
-        case 'VKWebAppGeodataResult':
-          this.setState({
-            lat: e.detail.data.lat,
-            long: e.detail.data.long,
-            firstEntry: false,
-            currentGeo : { center: [e.detail.data.lat, e.detail.data.long], zoom: 15 },
-            coordinates : [[e.detail.data.lat, e.detail.data.long]],
 
-          });
-          break;
-        default:
-          console.log("error");
-      }
-      connect.send("VKWebAppGetGeodata", {});
-    });
 
-    }
-    componentDidMount() {
-      this.timerID = setInterval(
-        () => this.tick(),
-        1000000
-      );
-    }
+  };
 
-    componentWillUnmount() {
-      clearInterval(this.timerID);
-    }
 
-    tick() {
-      connect.send("VKWebAppGetGeodata", {});
-    }
 
   render(){
     return (
@@ -75,7 +47,7 @@ class Way extends React.Component {
           {osname === IOS ? <Icon28ChevronBack/> : <Icon24Back/>}
         </HeaderButton>}>
         </PanelHeader>
-               <Group title="Информация о маршруте">
+               <Group description = "можно добавить описание тут" title="Информация о маршруте">
                   <List>
                   <Cell>
                     <InfoRow title="Мест для посещения">
@@ -110,14 +82,11 @@ class Way extends React.Component {
                   <option value="10">10</option>
                 </Select>
               </FormLayout>
-              <Group title="Кнопка c иконкой">
-                <CellButton defore={<Icon24Add />} onClick={this.props.go} data-to="add">Добавить родственника</CellButton>
-              </Group>
-              // <Separator style={{ margin: '12px 0' }} />
+                <CellButton before={<Icon24Add />} onClick={this.props.go} data-to="add">Добавить место</CellButton>
+                <Separator style={{ margin: '12px 0' }} />
               <List>
 
               {this.state.removeList.length > 0 &&
-                  <Group title="Удаление">
                     <List>
                       {this.state.removeList.map((item, index) => (
                         <Cell key={item} removable draggable onRemove={() => {
@@ -134,23 +103,17 @@ class Way extends React.Component {
 
                       ))}
                     </List>
-                  </Group>
+
                 }
-                {this.state.draggingList.map((item) => (
-                  <Cell key={item} draggable onDragFinish={({ from, to }) => {
-                    const draggingList = [...this.state.draggingList];
-                    draggingList.splice(from, 1);
-                    draggingList.splice(to, 0, this.state.draggingList[from]);
-                    this.setState({ draggingList });
-                  }}>{item}</Cell>
-                ))}
+
+
               </List>
-               </Group>
-               <Group>
+              </Group>
+               <List>
                <CellButton expandable onClick={this.props.go} data-to="start">
                 Вернуться обратно
                 </CellButton>
-                </Group>
+                </List>
                 <Button level="secondary" size="xl">Сбросить</Button>
 
 

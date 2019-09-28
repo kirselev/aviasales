@@ -8,7 +8,7 @@ import App from './App';
 
 // Init VK  Mini App
 connect.send('VKWebAppInit', {});
-connect.subscribe(e => console.log(e));
+
 // Если вы хотите, чтобы ваше веб-приложение работало в оффлайне и загружалось быстрее,
 // расскомментируйте строку с registerServiceWorker();
 // Но не забывайте, что на данный момент у технологии есть достаточно подводных камней

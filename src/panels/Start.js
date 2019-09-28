@@ -31,53 +31,21 @@ class Start extends React.Component {
         activePanel: 'start'
       };
 
-      connect.subscribe((e) => {
-        switch (e.detail.type) {
-          case 'VKWebAppGeodataResult':
-            this.setState({
-              lat: e.detail.data.lat,
-              long: e.detail.data.long,
-              firstEntry: false,
-              currentGeo : { center: [e.detail.data.lat, e.detail.data.long], zoom: 15 },
-              coordinates : [[e.detail.data.lat, e.detail.data.long]],
 
-            });
-            break;
-          default:
-            console.log("error");
-        }
-        connect.send("VKWebAppGetGeodata", {});
-      });
 
-    }
-    /*componentDidMount() {
-      this.timerID = setInterval(
-        () => this.tick(),
-        1000000
-      );
-    }
+    };
 
-    componentWillUnmount() {
-      clearInterval(this.timerID);
-    }
 
-    tick() {
-      connect.send("VKWebAppGetGeodata", {});
-    }*/
+
+
     render(){
     return (
       <View activePanel={this.state.activePanel}>
         <Panel id= "start">
         <PanelHeader>
-    			Время и Гео
+    			Aviasales
     		</PanelHeader>
-          <Group>
-          <Header>
-            Плейлисты
-          </Header>
-
-
-
+          <Group title="Карты">
 
           <List>
             <Cell asideContent={<Switch />}>
@@ -85,9 +53,7 @@ class Start extends React.Component {
             </Cell>
 
           <Cell expandable onClick={this.props.go} data-to="way">Построить маршрут</Cell>
-          {this.props.player}
           </List>
-          <Cell expandable onClick={this.props.go} data-to="modal">Открыть модальную страницу</Cell>
 
           </Group>
           <Group title="Фильтры">
@@ -97,6 +63,7 @@ class Start extends React.Component {
             <Checkbox>Развлечения </Checkbox>
           </Group>
 
+          {this.props.player}
 
         </Panel>
 
