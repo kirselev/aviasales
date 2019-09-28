@@ -28,7 +28,7 @@ class Start extends React.Component {
         currentGeo: null,
         coordinates: null,
         draggingList: [2, 3, 1, 4, 5],
-        activePanel: 'start',
+        activePanel: 'start'
       };
 
       connect.subscribe((e) => {
@@ -50,7 +50,7 @@ class Start extends React.Component {
       });
 
     }
-    componentDidMount() {
+    /*componentDidMount() {
       this.timerID = setInterval(
         () => this.tick(),
         1000000
@@ -63,7 +63,7 @@ class Start extends React.Component {
 
     tick() {
       connect.send("VKWebAppGetGeodata", {});
-    }
+    }*/
     render(){
     return (
       <View activePanel={this.state.activePanel}>
@@ -88,13 +88,16 @@ class Start extends React.Component {
           {this.props.player}
           </List>
           <Cell expandable onClick={this.props.go} data-to="modal">Открыть модальную страницу</Cell>
+
+          </Group>
           <Group title="Фильтры">
             <Checkbox>Парки</Checkbox>
             <Checkbox>Музеи </Checkbox>
             <Checkbox>Заведения </Checkbox>
             <Checkbox>Развлечения </Checkbox>
-
           </Group>
+
+
         </Panel>
 
 			</View>

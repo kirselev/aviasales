@@ -38,82 +38,26 @@ class Modal extends React.Component {
     super(props);
 
     this.state = {
-      activeModal: null,
-      modalHistory: []
+      activeModal: 'first',
+
     };
 
 
-  }
-  setActiveModal(activeModal) {
-  activeModal = activeModal || null;
-  let modalHistory = this.state.modalHistory ? [...this.state.modalHistory] : [];
 
-  if (activeModal === null) {
-    modalHistory = [];
-  } else if (modalHistory.indexOf(activeModal) !== -1) {
-    modalHistory = modalHistory.splice(0, modalHistory.indexOf(activeModal) + 1);
-  } else {
-    modalHistory.push(activeModal);
-  }
-
-  this.setState({
-    activeModal,
-    modalHistory
-  });
 }
 
 
   render() {
-    const modal = (
-      <ModalRoot activeModal={this.state.activeModal}>
-
-        <ModalCard
-          id={'first'}
-          onClose={ () => this.setState({activeModal:null})}
-          icon={<Icon56MoneyTransferOutline />}
-          title="Отправляйте деньги друзьям, используя банковскую карту"
-          caption="Номер карты получателя не нужен — он сам решит, куда зачислить средства."
-          actions={[{
-            title: 'Попробовать',
-            type: 'primary',
-            action: () => {
-              this.setState({activeModal:'second'});
-            }
-          }]}
-        >
-        </ModalCard>
-        <ModalCard
-          id={'second'}
-          onClose={ () => this.setState({activeModal:null})}
-          icon={<Icon56MoneyTransferOutline />}
-          title="Вторая карта"
-          caption="Номер карты получателя не нужен — он сам решит, куда зачислить средства."
-          actions={[{
-            title: 'Попробовать',
-            type: 'primary',
-            action: () => {
-              this.setState({activeModal:'first'});
-            }
-          }]}
-        >
-        </ModalCard>
-      </ModalRoot>
-    );
 
     return (
-      <View activePanel='modal' modal={modal}>
         <Panel id= "modal">
           <PanelHeader> Salut </PanelHeader>
           <Group>
             <FormLayout>
-              <Button size="xl" level="secondary"
-                  onClick={() => this.setActiveModal(MODAL_CARD_MONEY_SEND)}>
-                  Открыть модальные карточки
-              </Button>
+              <Button onClick={console.log('hhh')}>Primary</Button>
             </FormLayout>
           </Group>
         </Panel>
-      </View>
     );
   }
 }

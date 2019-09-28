@@ -130,7 +130,7 @@ class Way extends React.Component {
                           draggingList.splice(to, 0, this.state.draggingList[from]);
                           this.setState({ draggingList });
                         }}
-                        ><CellButton align = "left" before={<Icon24info  onClick={this.props.go} data-to="start"/>}>{item}</CellButton></Cell>
+                        ><CellButton align = "left" before={<Icon24info  onClick={() => this.setState({ activeModal: 'first' }) } data-to="start"/>}>{item}</CellButton></Cell>
 
                       ))}
                     </List>
@@ -155,8 +155,7 @@ class Way extends React.Component {
 
 
                 <Button size="xl">Завершить</Button>
-
-
+                {this.props.player}
       </Panel>
     );
   }
