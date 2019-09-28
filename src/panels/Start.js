@@ -53,7 +53,7 @@ class Start extends React.Component {
     componentDidMount() {
       this.timerID = setInterval(
         () => this.tick(),
-        10000
+        1000000
       );
     }
 
@@ -77,14 +77,7 @@ class Start extends React.Component {
           </Header>
 
 
-            {this.state.currentGeo && <YMaps>
-              <Div>
-                <Map defaultState={this.state.currentGeo}>
-                  {this.state.coordinates.map(coordinate => (<Placemark geometry={coordinate} />))}
-                </Map>
-              </Div>
-            </YMaps>}
-          </Group>
+
 
           <List>
             <Cell asideContent={<Switch />}>

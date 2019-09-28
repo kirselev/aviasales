@@ -55,7 +55,7 @@ class Way extends React.Component {
     componentDidMount() {
       this.timerID = setInterval(
         () => this.tick(),
-        10000
+        1000000
       );
     }
 
@@ -94,6 +94,7 @@ class Way extends React.Component {
                   </Cell>
                 </List>
               </Group>
+
               <Group title="Редактирование маршрута">
                <FormLayout>
                 <Select top="Количество мест" placeholder="10">
@@ -114,13 +115,7 @@ class Way extends React.Component {
               </Group>
               // <Separator style={{ margin: '12px 0' }} />
               <List>
-              {this.state.currentGeo && <YMaps>
-                <Div>
-                  <Map defaultState={this.state.currentGeo}>
-                    {this.state.coordinates.map(coordinate => (<Placemark geometry={coordinate} />))}
-                  </Map>
-                </Div>
-              </YMaps>}
+
               {this.state.removeList.length > 0 &&
                   <Group title="Удаление">
                     <List>
@@ -135,7 +130,7 @@ class Way extends React.Component {
                           draggingList.splice(to, 0, this.state.draggingList[from]);
                           this.setState({ draggingList });
                         }}
-                        ><CellButton align = "left" before={<Icon24info />}>{item}</CellButton></Cell>
+                        ><CellButton align = "left" before={<Icon24info  onClick={this.props.go} data-to="start"/>}>{item}</CellButton></Cell>
 
                       ))}
                     </List>
