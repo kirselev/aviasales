@@ -111,11 +111,14 @@ const Mapmap = () => {
     const mapRef = useRef(null);
     const getRoute = () => {
         if (ymaps) {
+            var lst = [];
+            for (int i = 0; i < dict['Culture'].length; ++i) {
+              lst.push([dict['Culture'][i]['latitude'], dict['Culture'][i]['longitude']]);
+            }
             var multiRoute = new ymaps.multiRouter.MultiRoute(
                 {
                     // Описание опорных точек мультимаршрута.
-                    referencePoints: [[json2['data'][0]['coordinates']['latitude'], json2['data'][0]['coordinates']['longitude']],
-                        [json2['data'][1]['coordinates']['latitude'], json2['data'][1]['coordinates']['longitude']]],
+                    referencePoints: lst,
                     // Параметры маршрутизации.
                     params: {
                         // Ограничение на максимальное количество маршрутов, возвращаемое маршрутизатором.
