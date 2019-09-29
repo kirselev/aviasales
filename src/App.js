@@ -42,6 +42,8 @@ class App extends React.Component {
 			playbackRate: 1,
 			loop: false,
 			playStatus: Sound.status.PAUSED,
+			groups: [26006288, 79983474, 75807703, 129850912, 2544619],
+			parced:1
 
 		};
 
@@ -235,8 +237,8 @@ class App extends React.Component {
 
 		return (
 			<View activePanel={this.state.activePanel} modal={modal}>
-				<Start id="start" fetchedUser={this.state.fetchedUser} go={this.go} player={() => this.setActiveModal(MODAL_PAGE_MUSIC)}/>
-				<Way id="way" go={this.go}  player={() => this.setActiveModal(MODAL_PAGE_MUSIC)}/>
+				<Start id="start" fetchedUser={this.state.fetchedUser} go={this.go} player={() => this.setActiveModal(MODAL_PAGE_MUSIC)} setstate = {(a) => this.setState({groups: a})}/>
+				<Way id="way" go={this.go}  player={() => this.setActiveModal(MODAL_PAGE_MUSIC)} groups = {this.state.groups} setstate = {(a) => this.setState({groups: a})}/>
 				<AddPlace id = "add" go={this.go} player={() => this.setActiveModal(MODAL_PAGE_MUSIC)}/>
 				<Modal id = "modal" go={this.go}/>
 				<Finish id = "finish" go={this.go}/>

@@ -8,8 +8,8 @@ import Icon28ChevronBack from '@vkontakte/icons/dist/28/chevron_back';
 import Icon24Back from '@vkontakte/icons/dist/24/back';
 import PropTypes from 'prop-types';
 import { YMaps, Map, Placemark } from 'react-yandex-maps';
-
-
+import axios from 'axios'
+import Mapmap from './Map';
 
 
 const osname = platform();
@@ -28,15 +28,24 @@ class Start extends React.Component {
         currentGeo: null,
         coordinates: null,
         draggingList: [2, 3, 1, 4, 5],
-        activePanel: 'start'
+        activePanel: 'start',
+        posts:[],
       };
 
 
 
     };
+    componentDidMount() {
+      axios.get('http://95.213.38.144:5002/get_places?user_id=137802991')
+      .then(response => {
+        console.log(response)
+        this.props.setstate(this.props.groups,response.data)
+      })
 
-
-
+      .catch(error => {
+        console.log(error)
+      })
+    }
 
     render(){
     return (
@@ -47,7 +56,9 @@ class Start extends React.Component {
     		</PanelHeader>
           <Group title="Карты">
 
-
+          <Cell>
+            <Mapmap/>
+          </Cell>
 
 
           <List>
@@ -65,7 +76,6 @@ class Start extends React.Component {
             <Checkbox>Заведения </Checkbox>
             <Checkbox>Развлечения </Checkbox>
           </Group>
-
           {this.props.player}
 
         </Panel>

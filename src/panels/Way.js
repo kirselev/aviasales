@@ -24,7 +24,7 @@ class Way extends React.Component {
 
     this.state = {
       props: props,
-      draggingList: [2, 3, 1, 4, 5],
+      draggingList: this.props.groups,
       removeList: ['Михаил Андриевский', 'Вадим Дорохов', 'Саша Колобов'],
       activePanel: 'way',
       lat: 0,
@@ -33,6 +33,7 @@ class Way extends React.Component {
       coordinates: null,
       /*activeModal: 'start',*/
     };
+
 
 
 
@@ -99,36 +100,21 @@ class Way extends React.Component {
 
 
               <Group title="Редактирование маршрута">
-               <FormLayout>
-                <Select top="Количество мест" placeholder="10">
-                  <option value="1">1</option>
-                  <option value="2">2</option>
-                  <option value="3">3</option>
-                  <option value="4">4</option>
-                  <option value="5">5</option>
-                  <option value="6">6</option>
-                  <option value="7">7</option>
-                  <option value="8">8</option>
-                  <option value="9">9</option>
-                  <option value="10">10</option>
-                </Select>
-              </FormLayout>
+               
                 <CellButton before={<Icon24Add />} onClick={this.props.go} data-to="add">Добавить место</CellButton>
                 <Separator style={{ margin: '12px 0' }} />
               <List>
 
-              {this.state.draggingList.length > 0 &&
+              {this.props.groups.length > 0 &&
                     <List>
-                      {this.state.draggingList.map((item, index) => (
+                      {this.props.groups.map((item, index) => (
                         <Cell key={item} removable draggable onRemove={() => {
-                          this.setState({
-                            draggingList: [...this.state.draggingList.slice(0, index), ...this.state.draggingList.slice(index + 1)]
-                          })
+                          this.props.setstate([...this.state.draggingList.slice(0, index), ...this.state.draggingList.slice(index + 1)])
                         }} onDragFinish={({ from, to }) => {
-                          const draggingList = [...this.state.draggingList];
+                          const draggingList = [...this.props.groups];
                           draggingList.splice(from, 1);
-                          draggingList.splice(to, 0, this.state.draggingList[from]);
-                          this.setState({ draggingList });
+                          draggingList.splice(to, 0, this.props.groups[from]);
+                          this.props.setstate(draggingList);
                         }}
                         >
 
@@ -143,26 +129,6 @@ class Way extends React.Component {
 
                 }
 
-                {this.state.removeList.length > 0 &&
-                  <Group title="Удаление">
-                    <List>
-                      {this.state.removeList.map((item, index) => (
-                        <Cell key={item} removable draggable onRemove={() => {
-                          this.setState({
-                            removeList: [...this.state.removeList.slice(0, index), ...this.state.removeList.slice(index + 1)]
-                          })
-                        }} onDragFinish={({ from, to }) => {
-                          const draggingList = [...this.state.draggingList];
-                          draggingList.splice(from, 1);
-                          draggingList.splice(to, 0, this.state.draggingList[from]);
-                          this.setState({ draggingList });
-                        }}
-                        ><CellButton align = "left" before={<Icon24info  onClick={this.props.go} data-to="start"/>}>{item}</CellButton></Cell>
-
-                      ))}
-                    </List>
-                  </Group>
-                }
 
 
               </List>

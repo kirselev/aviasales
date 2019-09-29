@@ -1,0 +1,134 @@
+{
+  "schema": {
+    "fields": [
+      {
+        "name": "index",
+        "type": "integer"
+      },
+      {
+        "name": "vk_id",
+        "type": "integer"
+      },
+      {
+        "name": "url",
+        "type": "string"
+      },
+      {
+        "name": "coordinates",
+        "type": "string"
+      },
+      {
+        "name": "title",
+        "type": "string"
+      },
+      {
+        "name": "members_num",
+        "type": "number"
+      },
+      {
+        "name": "subject",
+        "type": "string"
+      }
+    ],
+    "primaryKey": [
+      "index"
+    ],
+    "pandas_version": "0.20.0"
+  },
+  "data": [
+    {
+      "index": 0,
+      "vk_id": 54878061,
+      "url": "https://vk.com/gim",
+      "coordinates": {
+        "latitude": 55.754998,
+        "longitude": 37.618174
+      },
+      "title": "Государственный исторический музей",
+      "members_num": 76333,
+      "subject": "Cultural centre"
+    },
+    {
+      "index": 1,
+      "vk_id": 58823863,
+      "url": "https://vk.com/moychayru",
+      "coordinates": {
+        "latitude": 55.763227,
+        "longitude": 37.63594
+      },
+      "title": "Мойчай.ру на Мясницкой",
+      "members_num": 71130,
+      "subject": "Cultural centre"
+    },
+    {
+      "index": 2,
+      "vk_id": 58823863,
+      "url": "https://vk.com/moychayru",
+      "coordinates": {
+        "latitude": 55.773702,
+        "longitude": 37.682314
+      },
+      "title": "Чайная на Бакунинской",
+      "members_num": 71130,
+      "subject": "Cultural centre"
+    },
+    {
+      "index": 3,
+      "vk_id": 58823863,
+      "url": "https://vk.com/moychayru",
+      "coordinates": {
+        "latitude": 55.762148,
+        "longitude": 37.651871
+      },
+      "title": "Чайный Клуб Мойчай.ру, Покровка",
+      "members_num": 71130,
+      "subject": "Cultural centre"
+    },
+    {
+      "index": 4,
+      "vk_id": 58823863,
+      "url": "https://vk.com/moychayru",
+      "coordinates": {
+        "latitude": 55.771589,
+        "longitude": 37.60611
+      },
+      "title": "Клуб Чайной Культуры, Мойчай.ру",
+      "members_num": 71130,
+      "subject": "Cultural centre"
+    },
+    {
+      "index": 5,
+      "vk_id": 19049790,
+      "url": "https://vk.com/flacon",
+      "coordinates": {
+        "latitude": 55.804916,
+        "longitude": 37.585449
+      },
+      "title": "Дизайн-квартал Flacon",
+      "members_num": 50569,
+      "subject": "Cultural centre"
+    },
+    {
+      "index": 6,
+      "vk_id": 3562676,
+      "url": "https://vk.com/pionercinema",
+      "coordinates": {
+        "latitude": 55.745089,
+        "longitude": 37.54997
+      },
+      "title": "Пионер",
+      "members_num": 24254,
+      "subject": "Cultural centre"
+    },
+    {
+      "index": 7,
+      "vk_id": 29283088,
+      "url": "https://vk.com/jfestival",
+      "coordinates": {
+        "latitude": 55.727815,
+        "longitude": 37.601687
+      },
+      "title": "J-FEST фестиваль японской современной культуры",
+      "members_num": 21271,
+      "subject": "Cultural centre"
+    }]}
